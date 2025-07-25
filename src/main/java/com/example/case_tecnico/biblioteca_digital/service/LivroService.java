@@ -1,12 +1,16 @@
 package com.example.case_tecnico.biblioteca_digital.service;
 
 import com.example.case_tecnico.biblioteca_digital.dto.LivroDTO;
+import com.example.case_tecnico.biblioteca_digital.model.Autor;
 import com.example.case_tecnico.biblioteca_digital.model.Livro;
 import com.example.case_tecnico.biblioteca_digital.repository.AutorRepository;
+import com.example.case_tecnico.biblioteca_digital.repository.CategoriaRepository;
 import com.example.case_tecnico.biblioteca_digital.repository.LivroRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +21,11 @@ public class LivroService {
     private final CategoriaRepository categoriaRepository;
 
     public List<LivroDTO> listarTodos() {
-        return livroRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+        return livroRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors
+                .toList());
     }
 
     public LivroDTO buscarPorId(Long id) {
