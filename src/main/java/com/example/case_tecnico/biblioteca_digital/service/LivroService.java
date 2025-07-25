@@ -7,6 +7,7 @@ import com.example.case_tecnico.biblioteca_digital.repository.AutorRepository;
 import com.example.case_tecnico.biblioteca_digital.repository.CategoriaRepository;
 import com.example.case_tecnico.biblioteca_digital.repository.LivroRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
