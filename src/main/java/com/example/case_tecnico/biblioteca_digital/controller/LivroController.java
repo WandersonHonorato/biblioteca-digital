@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -28,7 +29,9 @@ public class LivroController {
 
     @PostMapping
     public ResponseEntity<LivroDTO> criar(@RequestBody @Valid LivroDTO dto) {
-        return ResponseEntity.ok(livroService.criar(dto));
+        LivroDTO novo = livroService.criar(dto);
+        URI uri = URI.create("/api/livros/" + novo.id());
+        return ResponseEntity.created(uri).body(novo);
     }
 
     @PutMapping("/{id}")
