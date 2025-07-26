@@ -10,11 +10,14 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public static class AutorService {
+public class AutorService {
     private final AutorRepository autorRepository;
 
     public List<AutorDTO> listarTodos() {
-        return autorRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+        return autorRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
     public AutorDTO buscarPorId(Long id) {
