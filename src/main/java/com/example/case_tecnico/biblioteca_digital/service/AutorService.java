@@ -1,11 +1,14 @@
 package com.example.case_tecnico.biblioteca_digital.service;
 
+import com.example.case_tecnico.biblioteca_digital.dto.AutorDTO;
 import com.example.case_tecnico.biblioteca_digital.model.Autor;
 import com.example.case_tecnico.biblioteca_digital.repository.AutorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -21,7 +24,8 @@ public class AutorService {
     }
 
     public AutorDTO buscarPorId(Long id) {
-        Autor autor = autorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
+        Autor autor = autorRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
         return toDTO(autor);
     }
 

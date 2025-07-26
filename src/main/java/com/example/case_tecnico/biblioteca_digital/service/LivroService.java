@@ -2,6 +2,7 @@ package com.example.case_tecnico.biblioteca_digital.service;
 
 import com.example.case_tecnico.biblioteca_digital.dto.LivroDTO;
 import com.example.case_tecnico.biblioteca_digital.model.Autor;
+import com.example.case_tecnico.biblioteca_digital.model.Categoria;
 import com.example.case_tecnico.biblioteca_digital.model.Livro;
 import com.example.case_tecnico.biblioteca_digital.repository.AutorRepository;
 import com.example.case_tecnico.biblioteca_digital.repository.CategoriaRepository;
@@ -10,6 +11,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +27,12 @@ public class LivroService {
         return livroRepository.findAll()
                 .stream()
                 .map(this::toDTO)
-                .collect(Collectors
-                .toList());
+                .collect(Collectors.toList());
     }
 
     public LivroDTO buscarPorId(Long id) {
-        Livro livro = livroRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
+        Livro livro = livroRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
         return toDTO(livro);
     }
 
@@ -42,13 +44,24 @@ public class LivroService {
 
     @Transactional
     public LivroDTO atualizar(Long id, LivroDTO dto) {
-        Livro livro = livroRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
+        Livro livro = livroRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
+
         livro.setTitulo(dto.titulo());
         livro.setIsbn(dto.isbn());
         livro.setAnoPublicacao(dto.anoPublicacao());
         livro.setPreco(dto.preco());
-        livro.setAutor(autorRepository.findById(dto.autorId()).orElseThrow(() -> new EntityNotFoundException("Autor não encontrado")));
-        livro.setCategoria(categoriaRepository.findById(dto.categoriaId()).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada")));
+
+        livro.setAutor(
+                autorRepository.findById(dto.autorId())
+                        .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"))
+        );
+
+        livro.setCategoria(
+                categoriaRepository.findById(dto.categoriaId())
+                        .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"))
+        );
+
         return toDTO(livroRepository.save(livro));
     }
 
@@ -73,6 +86,7 @@ public class LivroService {
                 .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
         Categoria categoria = categoriaRepository.findById(dto.categoriaId())
                 .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
+
         return Livro.builder()
                 .titulo(dto.titulo())
                 .isbn(dto.isbn())
@@ -82,3 +96,4 @@ public class LivroService {
                 .categoria(categoria)
                 .build();
     }
+}

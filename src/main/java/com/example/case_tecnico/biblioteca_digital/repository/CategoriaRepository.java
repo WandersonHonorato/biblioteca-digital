@@ -1,7 +1,11 @@
 package com.example.case_tecnico.biblioteca_digital.repository;
 
-import java.util.Arrays;
+import com.example.case_tecnico.biblioteca_digital.model.Categoria;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CategoriaRepository {
-    Arrays findAll();
+@Repository
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+
 }
