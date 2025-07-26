@@ -51,7 +51,6 @@ public class LivroService {
         livro.setIsbn(dto.isbn());
         livro.setAnoPublicacao(dto.anoPublicacao());
         livro.setPreco(dto.preco());
-
         livro.setAutor(
                 autorRepository.findById(dto.autorId())
                         .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"))

@@ -24,8 +24,7 @@ public class AutorService {
     }
 
     public AutorDTO buscarPorId(Long id) {
-        Autor autor = autorRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
+        Autor autor = autorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
         return toDTO(autor);
     }
 
