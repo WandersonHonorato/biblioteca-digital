@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class AutorService {
+
     private final AutorRepository autorRepository;
 
     public List<AutorDTO> listarTodos() {

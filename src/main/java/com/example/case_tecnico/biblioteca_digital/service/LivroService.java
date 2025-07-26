@@ -51,14 +51,11 @@ public class LivroService {
         livro.setIsbn(dto.isbn());
         livro.setAnoPublicacao(dto.anoPublicacao());
         livro.setPreco(dto.preco());
-        livro.setAutor(
-                autorRepository.findById(dto.autorId())
-                        .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"))
+        livro.setAutor(autorRepository.findById(dto.autorId())
+                .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"))
         );
-
-        livro.setCategoria(
-                categoriaRepository.findById(dto.categoriaId())
-                        .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"))
+        livro.setCategoria(categoriaRepository.findById(dto.categoriaId())
+                .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"))
         );
 
         return toDTO(livroRepository.save(livro));
