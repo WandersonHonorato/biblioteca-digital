@@ -1,5 +1,6 @@
 package com.example.case_tecnico.biblioteca_digital.controller;
 
+import com.example.case_tecnico.biblioteca_digital.dto.ImportarLivroDTO;
 import com.example.case_tecnico.biblioteca_digital.dto.LivroDTO;
 import com.example.case_tecnico.biblioteca_digital.service.LivroService;
 import jakarta.validation.Valid;
@@ -51,7 +52,7 @@ public class LivroController {
     }
 
     @PostMapping("/importar")
-    public ResponseEntity<LivroDTO> importar(@RequestBody @Valid ImportarLivroRequest request) {
+    public ResponseEntity<LivroDTO> importar(@RequestBody @Valid ImportarLivroDTO request) {
         return ResponseEntity.ok(livroService.importarLivroViaScraping(request));
     }
 }
