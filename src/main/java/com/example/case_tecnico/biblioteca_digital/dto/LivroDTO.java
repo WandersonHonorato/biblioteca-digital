@@ -20,6 +20,7 @@ public record LivroDTO(
         @Max(value = 2100, message = "O ano de publicação é inválido")
         Integer anoPublicacao,
 
+        @Positive(message = "O preço tem que ser um número positivo")
         @NotNull(message = "O preço é obrigatório")
         @DecimalMin(value = "0.0", inclusive = false, message = "O preço deve ser um número positivo")
         BigDecimal preco,

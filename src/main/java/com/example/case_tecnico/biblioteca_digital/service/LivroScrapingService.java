@@ -27,11 +27,24 @@ public class LivroScrapingService {
                 throw new IllegalArgumentException("URL inválida. ASIN não encontrado.");
             }
 
-            String html = webClient.get()
-                    .uri("/dp/{asin}", asin)
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    .block();
+            String html;
+            try {
+                html = webClient.get()
+                        .uri("/dp/{asin}", asin)
+                        .retrieve()
+                        .bodyToMono(String.class)
+                        .block();
+            } catch (WebClientResponseException e) {
+                log.error("Erro HTTP ao acessar a página do produto: Status {}, Body: {}", e.getStatusCode(), e.getResponseBodyAsString());
+                throw new RuntimeException("Erro ao acessar a página do livro. Verifique a URL.");
+            } catch (WebClientRequestException e) {
+                log.error("Erro de conexão ao acessar a página do produto: {}", e.getMessage());
+                throw new RuntimeException("Erro de conexão ao tentar acessar o site.");
+            }
+
+            if (html == null || html.isBlank()) {
+                throw new RuntimeException("Página vazia ou não encontrada.");
+            }
 
             Document doc = Jsoup.parse(html);
 
