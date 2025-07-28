@@ -46,14 +46,31 @@ public class LivroScrapingService {
                 throw new RuntimeException("Página vazia ou não encontrada.");
             }
 
-            Document doc = Jsoup.parse(html);
+             Document doc = Jsoup.parse(html);
 
             String titulo = doc.select("#productTitle").text().trim();
-            String precoStr = doc.select(".a-price .a-offscreen").text().replace("R$", "").replace(",", ".").trim();
-            String ano = extrairAnoPublicacao(doc);
+            if (titulo.isBlank()) {
+                throw new RuntimeException("Título do livro não encontrado.");
+            }
 
-            double preco = precoStr.isBlank() ? 0.0 : Double.parseDouble(precoStr);
-            int anoPublicacao = ano.isBlank() ? 0 : Integer.parseInt(ano);
+            String precoStr = doc.select(".a-price .a-offscreen").text()
+                    .replace("R$", "")
+                    .replace(",", ".")
+                    .trim();
+            double preco = 0.0;
+            try {
+                preco = precoStr.isBlank() ? 0.0 : Double.parseDouble(precoStr);
+            } catch (NumberFormatException e) {
+                log.warn("Preço com formato inválido: '{}'", precoStr);
+            }
+
+            String anoStr = extrairAnoPublicacao(doc);
+            int anoPublicacao = 0;
+            try {
+                anoPublicacao = anoStr.isBlank() ? 0 : Integer.parseInt(anoStr);
+            } catch (NumberFormatException e) {
+                log.warn("Ano de publicação com formato inválido: '{}'", anoStr);
+            }
 
             return new LivroDTO(
                     null,
