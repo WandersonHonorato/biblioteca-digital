@@ -1,7 +1,9 @@
-package com.example.case_tecnico.biblioteca_digital.model;
+package com.example.biblioteca_digital.database;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,28 +11,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
 @Entity
-@Table(name = "Autor")
-public class Autor {
+@Table(name = "Categoria")
+public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
     private String nome;
-
-    @Email
-    private String email;
-
-    private LocalDate dataNascimento;
-
-    @OneToMany(mappedBy = "autor")
-    private List<Livro> livros;
+    private String descricao;
 }
+

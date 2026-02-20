@@ -1,8 +1,8 @@
-package com.example.case_tecnico.biblioteca_digital.service;
+package com.example.biblioteca_digital.service;
 
-import com.example.case_tecnico.biblioteca_digital.dto.CategoriaDTO;
-import com.example.case_tecnico.biblioteca_digital.model.Categoria;
-import com.example.case_tecnico.biblioteca_digital.repository.CategoriaRepository;
+import com.example.biblioteca_digital.dto.CategoriaDTO;
+import com.example.biblioteca_digital.database.Categoria;
+import com.example.biblioteca_digital.repository.CategoriaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

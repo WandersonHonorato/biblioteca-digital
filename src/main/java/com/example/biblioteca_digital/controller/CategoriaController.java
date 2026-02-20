@@ -1,9 +1,7 @@
-package com.example.case_tecnico.biblioteca_digital.controller;
+package com.example.biblioteca_digital.controller;
 
-import com.example.case_tecnico.biblioteca_digital.dto.AutorDTO;
-import com.example.case_tecnico.biblioteca_digital.dto.CategoriaDTO;
-import com.example.case_tecnico.biblioteca_digital.service.AutorService;
-import com.example.case_tecnico.biblioteca_digital.service.CategoriaService;
+import com.example.biblioteca_digital.dto.CategoriaDTO;
+import com.example.biblioteca_digital.service.CategoriaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

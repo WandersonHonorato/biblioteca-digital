@@ -1,6 +1,6 @@
-package com.example.case_tecnico.biblioteca_digital.repository;
+package com.example.biblioteca_digital.repository;
 
-import com.example.case_tecnico.biblioteca_digital.model.Livro;
+import com.example.biblioteca_digital.database.Livro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

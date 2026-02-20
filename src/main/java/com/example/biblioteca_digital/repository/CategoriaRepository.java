@@ -1,7 +1,6 @@
-package com.example.case_tecnico.biblioteca_digital.repository;
+package com.example.biblioteca_digital.repository;
 
-import com.example.case_tecnico.biblioteca_digital.model.Categoria;
-import jakarta.validation.constraints.NotNull;
+import com.example.biblioteca_digital.database.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

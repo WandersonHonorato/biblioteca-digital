@@ -1,12 +1,12 @@
-package com.example.case_tecnico.biblioteca_digital.service;
+package com.example.biblioteca_digital.service;
 
-import com.example.case_tecnico.biblioteca_digital.dto.LivroDTO;
-import com.example.case_tecnico.biblioteca_digital.model.Autor;
-import com.example.case_tecnico.biblioteca_digital.model.Categoria;
-import com.example.case_tecnico.biblioteca_digital.model.Livro;
-import com.example.case_tecnico.biblioteca_digital.repository.AutorRepository;
-import com.example.case_tecnico.biblioteca_digital.repository.CategoriaRepository;
-import com.example.case_tecnico.biblioteca_digital.repository.LivroRepository;
+import com.example.biblioteca_digital.dto.LivroDTO;
+import com.example.biblioteca_digital.database.Autor;
+import com.example.biblioteca_digital.database.Categoria;
+import com.example.biblioteca_digital.database.Livro;
+import com.example.biblioteca_digital.repository.AutorRepository;
+import com.example.biblioteca_digital.repository.CategoriaRepository;
+import com.example.biblioteca_digital.repository.LivroRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

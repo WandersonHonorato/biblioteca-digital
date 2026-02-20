@@ -1,6 +1,6 @@
-package com.example.case_tecnico.biblioteca_digital.service;
+package com.example.biblioteca_digital.service;
 
-import com.example.case_tecnico.biblioteca_digital.dto.LivroDTO;
+import com.example.biblioteca_digital.dto.LivroDTO;
 import jakarta.validation.constraints.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;

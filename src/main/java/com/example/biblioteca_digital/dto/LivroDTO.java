@@ -1,4 +1,4 @@
-package com.example.case_tecnico.biblioteca_digital.dto;
+package com.example.biblioteca_digital.dto;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Max;

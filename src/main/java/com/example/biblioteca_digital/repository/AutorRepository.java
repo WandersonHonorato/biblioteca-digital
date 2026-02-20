@@ -1,6 +1,6 @@
-package com.example.case_tecnico.biblioteca_digital.repository;
+package com.example.biblioteca_digital.repository;
 
-import com.example.case_tecnico.biblioteca_digital.model.Autor;
+import com.example.biblioteca_digital.database.Autor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

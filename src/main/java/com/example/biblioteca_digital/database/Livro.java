@@ -1,4 +1,4 @@
-package com.example.case_tecnico.biblioteca_digital.model;
+package com.example.biblioteca_digital.database;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

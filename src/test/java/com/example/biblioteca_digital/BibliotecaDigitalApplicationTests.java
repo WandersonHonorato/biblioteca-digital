@@ -1,4 +1,4 @@
-package com.example.case_tecnico.biblioteca_digital;
+package com.example.biblioteca_digital;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
