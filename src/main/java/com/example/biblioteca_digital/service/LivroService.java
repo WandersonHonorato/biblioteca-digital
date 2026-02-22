@@ -1,6 +1,6 @@
 package com.example.biblioteca_digital.service;
 
-import com.example.biblioteca_digital.dto.LivroDTO;
+import com.example.biblioteca_digital.dto.LivroRequestDTO;
 import com.example.biblioteca_digital.database.Autor;
 import com.example.biblioteca_digital.database.Categoria;
 import com.example.biblioteca_digital.database.Livro;
@@ -23,27 +23,27 @@ public class LivroService {
     private final AutorRepository autorRepository;
     private final CategoriaRepository categoriaRepository;
 
-    public List<LivroDTO> listarTodos() {
+    public List<LivroRequestDTO> listarTodos() {
         return livroRepository.findAll()
                 .stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public LivroDTO buscarPorId(Long id) {
+    public LivroRequestDTO buscarPorId(Long id) {
         Livro livro = livroRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
         return toDTO(livro);
     }
 
     @Transactional
-    public LivroDTO criar(LivroDTO dto) {
+    public LivroRequestDTO criar(LivroRequestDTO dto) {
         Livro livro = toEntity(dto);
         return toDTO(livroRepository.save(livro));
     }
 
     @Transactional
-    public LivroDTO atualizar(Long id, LivroDTO dto) {
+    public LivroRequestDTO atualizar(Long id, LivroRequestDTO dto) {
         Livro livro = livroRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Livro não encontrado"));
 
@@ -65,8 +65,8 @@ public class LivroService {
         livroRepository.deleteById(id);
     }
 
-    private LivroDTO toDTO(Livro livro) {
-        return new LivroDTO(
+    private LivroRequestDTO toDTO(Livro livro) {
+        return new LivroRequestDTO(
                 livro.getId(),
                 livro.getTitulo(),
                 livro.getIsbn(),
@@ -77,7 +77,7 @@ public class LivroService {
         );
     }
 
-    private Livro toEntity(LivroDTO dto) {
+    private Livro toEntity(LivroRequestDTO dto) {
         Autor autor = autorRepository.findById(dto.autorId())
                 .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
         Categoria categoria = categoriaRepository.findById(dto.categoriaId())

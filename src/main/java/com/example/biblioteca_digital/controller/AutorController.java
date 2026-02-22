@@ -1,7 +1,7 @@
 package com.example.biblioteca_digital.controller;
 
 import com.example.biblioteca_digital.dto.AutorDTO;
-import com.example.biblioteca_digital.dto.LivroDTO;
+import com.example.biblioteca_digital.dto.LivroRequestDTO;
 import com.example.biblioteca_digital.service.AutorService;
 import com.example.biblioteca_digital.service.LivroService;
 import jakarta.validation.Valid;
@@ -57,7 +57,7 @@ public class AutorController {
     }
 
     @GetMapping("/{id}/livros")
-    public ResponseEntity<List<LivroDTO>> listarLivrosPorAutor(@PathVariable Long id) {
+    public ResponseEntity<List<LivroRequestDTO>> listarLivrosPorAutor(@PathVariable Long id) {
         return ResponseEntity.ok(livroService.listarPorAutor(id));
     }
 }

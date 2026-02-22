@@ -1,6 +1,6 @@
 package com.example.biblioteca_digital.service;
 
-import com.example.biblioteca_digital.dto.LivroDTO;
+import com.example.biblioteca_digital.dto.LivroRequestDTO;
 import jakarta.validation.constraints.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -20,7 +20,7 @@ public class LivroScrapingService {
             .defaultHeader("User-Agent", "Mozilla/5.0")
             .build();
 
-    public LivroDTO extrairDadosLivro(String url, Long autorId, Long categoriaId) {
+    public LivroRequestDTO extrairDadosLivro(String url, Long autorId, Long categoriaId) {
         try {
             String asin = extrairAsinDaUrl(url);
             if (asin == null || asin.isBlank()) {
@@ -72,7 +72,7 @@ public class LivroScrapingService {
                 log.warn("Ano de publicação com formato inválido: '{}'", anoStr);
             }
 
-            return new LivroDTO(
+            return new LivroRequestDTO(
                     null,
                     titulo,
                     asin, // usar o ASIN como ISBN fictício
