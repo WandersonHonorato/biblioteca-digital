@@ -16,7 +16,7 @@ public record AutorDTO(
         String email,
         @NotNull(message = "Data de nascimento é obrigatória")
         @Past(message = "Data de nascimento deve estar no passado")
-        LocalDate dataNascimento
+        LocalDate dataNascimento,
 
         Integer totalLivros
 ) {}

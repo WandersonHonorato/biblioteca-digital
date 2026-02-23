@@ -10,6 +10,6 @@ public record CategoriaDTO(
         @Size(max = 100, message = "Nome deve ter no máximo 100 caracteres")
         String nome,
         @Size(max = 350, message = "Descrição deve ter no máximo 350 caracteres")
-        String descricao
-        private Integer totalLivros;
+        String descricao,
+        Integer totalLivros
 ) {}

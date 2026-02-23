@@ -3,8 +3,9 @@ package com.example.biblioteca_digital.dto;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
-public record LivroRequestDTO(
+public record LivroDTO(
 
         @NotBlank(message = "O título é obrigatório")
         @Size(max = 100, message = "Título deve ter no máximo 100 caracteres")
@@ -28,5 +29,13 @@ public record LivroRequestDTO(
 
         @NotNull(message = "ID da categoria é obrigatório")
         Long categoriaId
+
+        @Size(max = 500, message = "URL de origem deve ter no máximo 500 caracteres")
+        String urlOrigem,
+
+        LocalDateTime dataCadastro,
+        LocalDateTime dataAtualizacao,
+        AutorDTO autor,
+        CategoriaDTO categoria,
 ) {}
 
