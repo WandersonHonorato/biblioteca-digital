@@ -86,7 +86,7 @@ public class LivroService {
     }
 
     public Optional<LivroDTO> buscarPorIsbn(String isbn) {
-        return livroRepository.findByIsbn((isbn)
+        return livroRepository.findByIsbn(isbn)
                 .map(this::converterParaDTO);
     }
 
@@ -148,52 +148,56 @@ public class LivroService {
     }
 
     LivroDTO converterParaDTO(Livro livro) {
-        LivroDTO dto = new LivroDTO();
-        dto.autorId();
-        dto.titulo();
-        dto.isbn();
-        dto.anoPublicacao();
-        dto.preco();
-        dto.autorId());
-        dto.categoriaId();
-        dto.urlOrigem();
-        dto.dataCadastro();
-        dto.dataAtualizacao();
 
-        AutorDTO autorDTO = new AutorDTO();
-        autorDTO.setId(livro.getAutor().getId());
-        autorDTO.setNome(livro.getAutor().getNome());
-        autorDTO.setEmail(livro.getAutor().getEmail());
-        autorDTO.setDataNascimento(livro.getAutor().getDataNascimento());
-        autorDTO.setTotalLivros(contarLivrosPorAutor(livro.getAutor().getId()));
-        dto.setAutor(autorDTO);
+        AutorDTO autorDTO = new AutorDTO(
+                livro.getAutor().getId(),
+                livro.getAutor().getNome(),
+                livro.getAutor().getEmail(),
+                livro.getAutor().getDataNascimento(),
+                livro.getAutor().getLivros().size()
+        );
 
-        CategoriaDTO categoriaDTO = new CategoriaDTO();
-        categoriaDTO.setId(livro.getCategoria().getId());
-        categoriaDTO.setNome(livro.getCategoria().getNome());
-        categoriaDTO.setDescricao(livro.getCategoria().getDescricao());
-        categoriaDTO.setTotalLivros(contarLivrosPorCategoria(livro.getCategoria().getId()));
-        dto.setCategoria(categoriaDTO);
+        CategoriaDTO categoriaDTO = new CategoriaDTO(
+                livro.getCategoria().getId(),
+                livro.getCategoria().getNome(),
+                livro.getCategoria().getDescricao(),
+                contarLivrosPorCategoria(livro.getCategoria().getId())
+        );
 
-        return dto;
+        return new LivroDTO(
+                livro.getId(),
+                livro.getTitulo(),
+                livro.getIsbn(),
+                livro.getAnoPublicacao(),
+                livro.getPreco(),
+                livro.getAutor().getId(),
+                livro.getCategoria().getId(),
+                livro.getUrlOrigem(),
+                livro.getDataCadastro(),
+                livro.getDataAtualizacao(),
+                autorDTO,
+                categoriaDTO
+        );
     }
 
-    private Livro converterParaEntidade(LivroDTO dto) {
-        Livro livro = new Livro();
-        livro.setTitulo(dto.getTitulo());
-        livro.setIsbn(dto.getIsbn());
-        livro.setAnoPublicacao(dto.getAnoPublicacao());
-        livro.setPreco(dto.getPreco());
-        livro.setUrlOrigem(dto.getUrlOrigem());
+        Livro converterParaEntidade (LivroDTO dto){
 
-        Autor autor = autorRepository.findById(dto.getAutorId())
-                .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
-        livro.setAutor(autor);
+            Livro livro = Livro.builder().build();
 
-        Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
-                .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
-        livro.setCategoria(categoria);
+            livro.setTitulo(dto.titulo());
+            livro.setIsbn(dto.isbn());
+            livro.setAnoPublicacao(dto.anoPublicacao());
+            livro.setPreco(dto.preco());
+            livro.setUrlOrigem(dto.urlOrigem()); // ou dto.urlOrigem() se renomear
 
-        return livro;
+            Autor autor = autorRepository.findById(dto.autorId())
+                    .orElseThrow(() -> new EntityNotFoundException("Autor não encontrado"));
+            livro.setAutor(autor);
+
+            Categoria categoria = categoriaRepository.findById(dto.categoriaId())
+                    .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
+            livro.setCategoria(categoria);
+
+            return livro;
+        }
     }
-}
