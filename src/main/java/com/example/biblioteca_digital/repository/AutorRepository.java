@@ -6,8 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.lang.ScopedValue;
 import java.util.Arrays;
+import java.util.Optional;
 
 @Repository
 public interface AutorRepository extends JpaRepository<Autor, Long> {
 
+    Optional<Autor> findByEmail(String email);
 }
